@@ -122,6 +122,7 @@ rownames(London_Demo) <- 1:nrow(London_Demo)
 
 # Making all columns into numeric
 i <- c(2, 6) 
+London_Demo$Children <- as.numeric(as.character(London_Demo$Children))
 London_Demo$Greaterthan65 <- as.numeric(as.character(London_Demo$Greaterthan65))
 London_Demo$nonwhite <- as.numeric(as.character(London_Demo$nonwhite))
 London_Demo$NotBorninUK <- as.numeric(as.character(London_Demo$NotBorninUK))
@@ -201,6 +202,27 @@ Missing_Data <- All_data[rowSums(is.na(All_data)) > 0,] # 8 rows of missing data
 # 536 was unavailable for Demo data
 # Highly likely that row 403 and 412 are the same wards but information on population was not available from Socio data
 # Same with row 490 and 492
+
+
+# Checking for outliers
+par(mfrow=c(3,5))
+boxplot(All_data$hhSocialRented, main = "Social Rented")
+boxplot(All_data$JobSeekers, main = "Job Seekers")
+boxplot(All_data$Noqual, main = "No qualifications")
+boxplot(All_data$Carsperhousehold, main = "Cars per household")
+boxplot(All_data$Crimerate, main = "Crime rate")
+# Observation 615 and 617 have very high crime rates +1500- likely to be an extra zero inserted
+boxplot(All_data$Openspace, main = "Open space percentage")
+boxplot(All_data$GeneralFertilityRate, main = "Fertility rate")
+boxplot(All_data$Malelifeexpectancy, main = "Male life expectancy")
+# Observation 537 has life expectancy of 178?? Very unlikely...
+boxplot(All_data$Femalelifeexpectancy, main = "Female life expectancy")
+boxplot(All_data$Children, main = "Percentage with children")
+boxplot(All_data$Greaterthan65, main = "Greater than 65")
+boxplot(All_data$nonwhite, main = "Percentage non-white")
+boxplot(All_data$NotBorninUK, main = "Percentage not born in UK")
+boxplot(All_data$NotEnglishspeaking, main = "Non-English speaking")
+
 
 
 #Checking missing data
